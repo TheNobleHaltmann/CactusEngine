@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Test</title>
+  </head>
+  <body>
+	<div style="width:800px; margin:auto;">
+      <canvas id="canvasName" width="800" height="800" style="margin:auto">
+          Your browser does not support the HTML5 canvas tag.</canvas>
+
+          <script src="engine_2.js"></script>
+	</div>
+  </body>
+</html>
+
+<script>
+// Engine bootup
+var canvas = document.getElementById("canvasName");
+var engine = new Engine(document, canvas);
+engine.delta_update = 100;
+engine.start();
+
+class Pizza extends drawnObject {
+	constructor() {
+        var ss = new SpriteSheet("pizzaSheet.png",32,32);
+        var ani = new Animation(ss,0,4,100);
+		super("pizza",75,75,canvas.width/2,canvas.height/2,ani);
+		this.xLoc = canvas.width/2;
+		this.yLoc = canvas.height/2;
+	}
+}
+
+engine.addObject(new Pizza());
+</script>

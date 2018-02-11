@@ -1,0 +1,177 @@
+<html>
+  <head>
+    <title>Team Cacti's Games</title>
+  </head>
+  <style>
+    body {
+      background-image: url("cactusTile.png");
+    }
+    
+    div.container {
+        width: 1080px;
+        margin: auto;
+        text-align: center;
+    }
+    
+    form.link-form {
+        display: inline-block;
+        margin: 15px;
+        vertical-align: text-top
+    }
+    
+    input.link-button {
+        display: inline-block;
+        height: 200px;
+        width: 250px;
+        color: black;
+        background-color: white;
+        border: 15px solid;
+        font-size: 2em;
+        white-space: normal;
+        box-shadow: 0 0 2px 1px black;
+    }
+    
+    div.section {
+        text-align: left;
+        background-color: #FDA;
+        border: 7px solid cornflowerblue;
+        border-radius: 15px;
+        box-shadow: 0 0 3px 2px black;
+        width: 860px;
+        padding: 10px;
+        margin: auto;
+        margin-bottom: 35px;
+        margin-top: 5px;
+    }
+    
+    h1 {
+        font-size: 4em;
+        background-color: cornflowerblue;
+        text-align: center;
+        border: 3px solid;
+        border-radius: 15px;
+        box-shadow: 0 0 3px 2px black;
+        color: brown;
+    }
+    
+    h2 {
+        font-size: 3.5em;
+        background-color: #d4b287;
+        border: 7px solid cornflowerblue;
+        border-radius: 15px;
+        box-shadow: 0 0 3px 2px black;
+        width: 900px;
+        margin: auto;
+    }
+    
+    h3 {
+        font-size: 1.9em;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+    
+    p {
+        font-size: 1.5em;
+        margin: 5px;
+    }
+  </style>
+  <body>
+  <div class="container">
+    <h1>Team Cacti</h1>
+    
+    <h2 id="introduction">Introduction</h2>
+    <div class="section">
+        <p>The Cactus Engine is a 2D engine for creating games using an HTML canvas and Javascript.</p>
+    </div>
+    
+    <h2 id="features">Features</h2>
+    <div class="section">
+        <h3>Object oriented</h3>
+        <p>Each game object can be assigned its own sprite, update function, draw function, etc.</p>
+        
+        <h3>Sprite sheet animation</h3>
+        <p>Sprites can be static images or sprite sheets</p>
+        
+        <h3>Other objects</h3>
+        <p>In addition to sprites, engine includes classes for drawing straight lines and writing text onto the canvas.</p>
+        
+        <h3>Input handling</h3>
+        <p>Each object can be assigned its own function in response to mouse events and/or keyboard events.  When input occurs, all objects with the relevant response function are notified.</p>
+        
+        <h3>Collision detection with axis aligned bounding boxes</h3>
+        <p>Objects are only checked for collision if they have been assigned a collision function.</p>
+        
+        <h3>Define update frequency</h3>
+        <p>Set how often the game updates on starting the engine.</p>
+        
+        <h3>Networking via Peer.js</h3>
+        <p>Inputs sent from one device to the other.</p>
+    </div>
+    
+    <h2 id="getstarted">Getting Started</h2>
+    <div class="section">
+        <p>Create an HTML page with a canvas element, and include the engine as a script source.  Include another source file for the game code.  As an example, here is the code for the page used for our Alchemy game:</p>
+        <img src="./indexPage/code1.png" alt="Code Snippet 1" />
+        <br/>
+        
+        <h3>STARTING THE ENGINE</h3>
+        <p>To create the engine, use something like the following line:</p>
+        <img src="./indexPage/code2.png" alt="Code Snippet 2" />
+        <p>Note that the “canvasName” string needs to match the id assigned to the canvas in the html file.  Once the engine has been created, use the following to start the engine:</p>
+        <img src="./indexPage/code3.png" alt="Code Snippet 3" />
+        <p>DELTA_UPDATE is the rate at which the engine will update.  If not provided, it will default to 1/30th of a second.</p>
+        <br/>
+        
+        <h3>ADDING OBJECTS</h3>
+        <p>To add an object to the engine, first create a drawnObject, then add the drawnObject to the engine using engine.addObject():</p>
+        <img src="./indexPage/code4.png" alt="Code Snippet 4" />
+        <p>The drawnObject constructor includes:</p>
+        <ul>
+            <li><b>type:</b> A string value that is not used by the engine at all.  Intended to be used by the developer to determine what an object is.</li>
+            <li><b>width:</b> The width in pixels of the image.  Must be an integer.</li>
+            <li><b>height:</b> The height in pixels of the image.  Must be an integer.</li>
+            <li><b>x:</b> The x coordinate of the center of the image on the canvas.  Must be an integer.</li>
+            <li><b>y:</b> The y coordinate of the center of the image on the canvas.  Must be an integer.</li>
+            <li><b>imageSrc:</b> A string value containing the path to find the image.  An example is: "./cops/cop.png".</li>
+        </ul>
+        
+        <h3>UPDATING THE OBJECT</h3>
+        <p>Each object can be given an update function that will be called regularly.  To do this, set the object’s .update property to the function that should be called.  This function should have no arguments, and can use the “this” keyword.  After setting this, call engine.bindEvents on the object.  An example is below:</p>
+        <img src="./indexPage/code5.png" alt="Code Snippet 5" />
+        
+        <h3>MOUSE INPUT</h3>
+        <p>Getting mouse input works similarly to setting an update function.  Set an object’s .onMouseDown, .onMouseUp, or .onMouseMove property to a function and that function will be called when that event happens.  The function should have one argument, the event created, and can use the “this” keyword.  An example is below:</p>
+        <img src="./indexPage/code6.png" alt="Code Snippet 6" />
+        
+        <h3>KEYBOARD INPUT</h3>
+        <p>Each object has an .onKeyDown and an .onKeyUp array.  Use the key string to index the array, and set the function at that value to the function that should run when the event occurs.  The function should have two arguments: the event created, and the object to run on.  The “this” keyword cannot be used.  An example is below:</p>
+        <img src="./indexPage/code7.png" alt="Cpde Snippet 7" />
+        
+        <h3>REMOVING OBJECTS</h3>
+        <p>To remove an object from the engine, use engine.removeObject( obj ).  To keep an object in the engine but remove anything that has been bound to it, use engine.unbindEvents( obj ).</p>
+    </div>
+    
+    <h2 id="gallery">Gallery of Games</h2>
+    <div class="section" style="text-align:center;">
+        <form class="link-form" action="./alchemy.html">
+          <input class="link-button" type="submit" value="Play Alchemy" style="color: hotpink;background-color:purple;"/>
+        </form>
+        <form class="link-form" action="./snake.html">
+          <input class="link-button" type="submit" style="color:black;background-color:yellow;" value="Play Snake" />
+        </form>
+        <form class="link-form" action="./bubble.html">
+          <input class="link-button" type="submit" style="color:limegreen;background-color:green;" value="Play Cactus Collider" />
+        </form>
+        <form class="link-form" action="./multiplayerSnake.html">
+          <input class="link-button" type="submit" style="color:magenta;background-color:cyan;" value="Play Multiplayer Snake" />
+        </form>
+        <form class="link-form" action="./networkSnake.html">
+          <input class="link-button" type="submit" style="color:white;background-color:darkorange;" value="Play Online Multiplayer Snake" />
+        </form>
+        <form class="link-form" action="./cops.html">
+          <input class="link-button" type="submit" style="color:blue;background-color:red;" value="Play 'Flops And Robbies" />
+        </form>
+    </div>
+  </div>
+  </body>
+</html>
